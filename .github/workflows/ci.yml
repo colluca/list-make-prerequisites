@@ -1,0 +1,35 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+
+  test-action:
+
+    name: Test Github Action
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: List prerequisites non-recursively
+      id: non-recursive-prerequisites
+      uses: ./
+      with:
+        working-directory: test
+        target: test
+    - name: Check non-recursive prerequisites
+      run: |
+        test "${{ steps.non-recursive-prerequisites.outputs.prerequisites }}" = "prereq"
+        echo ${{ steps.non-recursive-prerequisites.outputs.hash }}
+    - name: List recursive prerequisites
+      id: recursive-prerequisites
+      uses: ./
+      with:
+        working-directory: test
+        target: test
+        flags: --recursive
+    - name: Check recursive prerequisites
+      run: |
+        test "${{ steps.recursive-prerequisites.outputs.prerequisites }}" = "preprereq"
+        echo ${{ steps.recursive-prerequisites.outputs.hash }}
