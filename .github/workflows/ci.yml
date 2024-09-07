@@ -31,5 +31,5 @@ jobs:
         flags: --recursive
     - name: Check recursive prerequisites
       run: |
-        test "${{ steps.recursive-prerequisites.outputs.prerequisites }}" = "preprereq"
+        test "${{ steps.recursive-prerequisites.outputs.prerequisites }}" = "preprereq1 preprereq2"
         echo ${{ steps.recursive-prerequisites.outputs.hash }}

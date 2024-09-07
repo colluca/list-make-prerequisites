@@ -122,8 +122,8 @@ def list_prerequisites(target, recursive=False, debug=False):
         # Find all leaf prerequisites
         leaf_prerequisites = [node.name for node in root.descendants if node.is_leaf]
 
-        # Remove repetitions
-        leaf_prerequisites = list(set(leaf_prerequisites))
+        # Remove repetitions and sort for consistency
+        leaf_prerequisites = sorted(list(set(leaf_prerequisites)))
 
         # Return prerequisites
         return leaf_prerequisites
@@ -158,7 +158,7 @@ if __name__ == "__main__":
 
     if args.hash:
         # Print a hash of the prerequisites' contents
-        hash_value = hash_files(sorted(prerequisites))
+        hash_value = hash_files(prerequisites)
         print(hash_value)
     else:
         # Print the list of prerequisites
