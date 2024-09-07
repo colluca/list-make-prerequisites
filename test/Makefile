@@ -1,5 +1,6 @@
 test: prereq
 	cp $< $@
 
-prereq: preprereq
+prereq: preprereq1 preprereq2
 	cp $< $@
+	cat preprereq2 >> $@
