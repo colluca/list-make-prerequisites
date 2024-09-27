@@ -34,7 +34,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
-        hash=$(${GITHUB_ACTION_PATH}/list-make-prerequisites.py ${{ inputs.target }} ${{ inputs.flags }} --hash 2>/dev/null)
-        prerequisites=$(${GITHUB_ACTION_PATH}/list-make-prerequisites.py ${{ inputs.target }} ${{ inputs.flags }} 2>/dev/null | xargs)
+        hash=$(${GITHUB_ACTION_PATH}/list-make-prerequisites.py ${{ inputs.target }} ${{ inputs.flags }} --hash)
+        prerequisites=$(${GITHUB_ACTION_PATH}/list-make-prerequisites.py ${{ inputs.target }} ${{ inputs.flags }} | xargs)
         echo "hash=$hash" >> $GITHUB_OUTPUT
         echo "prerequisites=$prerequisites" >> $GITHUB_OUTPUT
