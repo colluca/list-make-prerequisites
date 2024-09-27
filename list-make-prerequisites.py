@@ -5,6 +5,7 @@
 from anytree import Node, RenderTree
 import argparse
 import hashlib
+from pathlib import Path
 import re
 import subprocess
 import sys
@@ -137,9 +138,18 @@ def hash_files(file_list):
     # Create a new SHA-256 hash object
     hasher = hashlib.sha256()
 
+    # If any prerequisite is a directory, replace it with its (recursive) contents
+    expanded_file_list = []
     for file_name in file_list:
-        # Open each file in binary mode
-        try:        
+        file = Path(file_name)
+        if file.is_dir():
+            expanded_file_list.extend([str(f) for f in file.rglob('*') if f.is_file()])
+        else:
+            expanded_file_list.append(file_name)
+
+    # Hash file contents
+    for file_name in expanded_file_list:
+        try:
             with open(file_name, 'rb') as f:
                 # Read the file content in chunks to avoid memory issues with large files
                 while chunk := f.read(8192):  # 8192 bytes per chunk
