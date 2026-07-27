@@ -25,6 +25,7 @@ CLI under the hood.
 | `target`            | Target to list prerequisites for                      | yes      |         |
 | `working-directory`  | Working directory to run Make in                       | no       | `.`     |
 | `flags`              | Additional flags to pass to `list-make-prerequisites`  | no       | `''`    |
+| `pymakeutils-version` | Version of the `pymakeutils` PyPI package to install  | no       | latest  |
 
 ## Outputs
 
