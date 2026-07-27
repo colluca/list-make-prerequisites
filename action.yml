@@ -28,10 +28,9 @@ runs:
   steps:
     - name: Install Package
       shell: bash
+      # `uv`-managed venvs don't ship `pip`. Prefer `uv pip install` when
+      # available so the action works inside such environments too.
       run: |
-        # `uv`-managed venvs don't ship `pip`, since `uv` installs packages
-        # itself without shelling out to it. Prefer `uv pip install` when
-        # available so the action works inside such environments too.
         if command -v uv >/dev/null 2>&1; then
           uv pip install pymakeutils
         else
