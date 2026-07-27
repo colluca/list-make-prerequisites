@@ -28,7 +28,15 @@ runs:
   steps:
     - name: Install Package
       shell: bash
-      run: python -m pip install pymakeutils
+      run: |
+        # `uv`-managed venvs don't ship `pip`, since `uv` installs packages
+        # itself without shelling out to it. Prefer `uv pip install` when
+        # available so the action works inside such environments too.
+        if command -v uv >/dev/null 2>&1; then
+          uv pip install pymakeutils
+        else
+          python -m pip install pymakeutils
+        fi
     - name: List Make Prerequisites
       id: list-make-prerequisites
       shell: bash
