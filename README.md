@@ -8,7 +8,7 @@ CLI under the hood.
 ## Usage
 
 ```yaml
-- uses: colluca/list-make-prerequisites@v1
+- uses: colluca/list-make-prerequisites@v1.1.0
   id: prereqs
   with:
     target: my-target
